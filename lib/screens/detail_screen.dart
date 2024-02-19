@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'person_model.dart';
+
+import '../data/person_model.dart';
 
 class DetailScreen extends StatelessWidget {
   const DetailScreen({super.key, required this.person});
@@ -12,7 +13,7 @@ class DetailScreen extends StatelessWidget {
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[Text('P: ${person.toString()}')],
+            children: <Widget>[Text('DetailScreen: ${person.toString()}')],
           ),
         ));
   }

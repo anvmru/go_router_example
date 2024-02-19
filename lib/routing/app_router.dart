@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'detail_screen.dart';
-import 'dialog_screen.dart';
-import 'main_screen.dart';
+import '../screens/detail_screen.dart';
+import '../screens/dialog_screen.dart';
+import '../screens/main_screen.dart';
 import 'observer.dart';
-import 'person_model.dart';
-import 'provider_screen.dart';
+import '../data/person_model.dart';
+import '../screens/provider_screen.dart';
 
 class AppRouter {
   static GoRouter get router => _router;

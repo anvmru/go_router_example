@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
+import '../data/person_model.dart';
+import '../routing/app_router.dart';
 import 'dialog_screen.dart';
-import 'person_model.dart';
 import 'provider_screen.dart';
-import 'app_router.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key, required this.title});
@@ -20,33 +21,40 @@ class _MainScreenState extends State<MainScreen> {
     final p1 = PersonModel('Anton', age: 28);
     final p2 = PersonModel('Tim', age: 26);
     final p3 = PersonModel('Liliya', age: 24);
+    final buttonStyle = ButtonStyle(
+      alignment: Alignment.center,
+      fixedSize: MaterialStatePropertyAll<Size>(Size.fromWidth(1.sw * 0.75)),
+    );
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            GestureDetector(
-              child: Text('Person1: ${p1.toString()}'),
-              onTap: () => context.push(AppRouter.details, extra: p1),
+            OutlinedButton(
+                style: buttonStyle,
+                onPressed: () => context.push(AppRouter.details, extra: p1),
+                child: Text('push: ${p1.toString()}')),
+            const SizedBox(height: 20),
+            OutlinedButton(
+              style: buttonStyle,
+              onPressed: () => ProviderScreen.go(context, p2),
+              child: Text('provider.go: ${p2.toString()}'),
             ),
             const SizedBox(height: 20),
-            GestureDetector(
-              child: Text('Person2: ${p2.toString()}'),
-              // onTap: () => context.push(ProviderScreen.path, extra: p2),
-              onTap: () => ProviderScreen.go(context, p2),
+            OutlinedButton(
+              style: buttonStyle,
+              onPressed: () => DialogScreen.go(context, p3),
+              child: Text('dialog.go: ${p3.toString()}'),
             ),
             const SizedBox(height: 20),
-            GestureDetector(
-              child: Text('Person3: ${p3.toString()}'),
-              onTap: () => DialogScreen.go(context, p3),
-            ),
-            const SizedBox(height: 20),
-            GestureDetector(
-              child: Text('Person3 per GoRouter: ${p1.toString()}'),
-              onTap: () =>
+            OutlinedButton(
+              style: buttonStyle,
+              onPressed: () =>
                   context.go('/${DialogScreen.path}', extra: {'person': p1}),
+              child: Text('goRouter.go: ${p1.toString()}'),
             ),
+            //const ShimmerArrows(),
           ],
         ),
       ),

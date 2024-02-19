@@ -1,11 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:go_router_example/routing/app_bottom_dialog_page.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'app_dialog_page.dart';
-import 'person_model.dart';
+
+import '../data/person_model.dart';
+import '../routing/app_dialog_page.dart';
 
 final personProvider =
     Provider.autoDispose<PersonModel?>((ref) => null, name: 'personProvider');
@@ -60,7 +60,8 @@ class DialogScreen extends ConsumerWidget {
     final person = param['person'] as PersonModel;
     final container = ProviderScope.containerOf(context);
     return AppDialogPage(
-      settings: RouteSettings(name: path, arguments: param),
+      name: path,
+      arguments: param,
       builder: (context) => Container(
         decoration: const BoxDecoration(
             borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
@@ -75,6 +76,32 @@ class DialogScreen extends ConsumerWidget {
                   child: const DialogScreen(),
                 ))),
       ),
+    );
+  }
+
+  /// билдер
+  static Page pageBuilder2(BuildContext context, GoRouterState state) {
+    final param = state.extra as Map<String, Object>;
+    final person = param['person'] as PersonModel;
+    final container = ProviderScope.containerOf(context);
+    return AppBottomDialogPage(
+      settings: RouteSettings(name: path, arguments: param),
+      containerBuilder: (context, animation, child) {
+        return Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+            child: child);
+      },
+      builder: (context) => SizedBox(
+          height: 400,
+          child: ClipRRect(
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(20)),
+              child: ProviderScope(
+                parent: container,
+                overrides: [personProvider.overrideWithValue(person)],
+                child: const DialogScreen(),
+              ))),
     );
   }
 }

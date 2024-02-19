@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class AppDialogPage<T> extends Page<T> {
-  AppDialogPage({
+  const AppDialogPage({
     super.key,
     required this.builder,
-    required this.settings,
+    super.name,
+    super.arguments,
     this.closeProgressThreshold,
     this.containerBuilder,
     this.expanded = false,
@@ -21,7 +22,6 @@ class AppDialogPage<T> extends Page<T> {
   });
 
   final WidgetBuilder builder;
-  final RouteSettings settings;
   final double? closeProgressThreshold;
   final WidgetWithChildBuilder? containerBuilder;
   final bool expanded;

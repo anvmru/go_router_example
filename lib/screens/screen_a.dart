@@ -9,8 +9,8 @@ class ScreenA extends StatelessWidget {
         appBar: AppBar(title: const Text('Screen A')),
         body: Center(
           child: ListView(
-            children: <Widget>[
-              const Text('Test B'),
+            children: const <Widget>[
+              Text('Test B'),
             ],
           ),
         ));

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'dialog_screen.dart';
-import 'person_model.dart';
+import '../data/person_model.dart';
 
 final personProvider =
     Provider.autoDispose<PersonModel?>((ref) => null, name: 'personProvider');

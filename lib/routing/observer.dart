@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'logger.dart';
+import '../utils/logger.dart';
 
 /// Наблюдатель за маршрутами навигации
 /// https://medium.com/@sumit.ghoshqa/understanding-routeobserver-in-flutter-309ce2997c27
@@ -13,23 +13,19 @@ class GoRouterObserver extends NavigatorObserver {
     if (route.settings.arguments != null) {
       // final obj = route.settings.arguments;
       // final String jsonString = jsonEncode(obj);
-      // if (jsonString.length <= 2) {
-      //   logd('** didPush argiments.empty! ${jsonString}');
-      // } else {
-      //   logd('** didPush argiments: ${jsonString}');
-      //   final List<int> bytes = utf8.encode(jsonString);
-      //   final jsonString2 = utf8.decode(bytes);
-      //   final obj2 = jsonDecode(jsonString2);
-      // }
+      // logd('** didPush argiments: ${jsonString}');
+      // final List<int> bytes = utf8.encode(jsonString);
+      // final jsonString2 = utf8.decode(bytes);
+      // final obj2 = jsonDecode(jsonString2);
 
-      final param = route.settings.arguments as Map<String, Object>;
-      if (param != null) {
-        p = param.keys.join(',');
+      final param = route.settings.arguments as Map<String, dynamic>;
+      if (param.isNotEmpty) {
+        p = '(${param.keys.join(',')})';
       }
     }
     final name =
-        route.settings.name != null ? '${route.settings.name}($p)' : '??';
-    logd('*** didPush. ${previousRoute?.settings.name ?? '?'}->${name}');
+        route.settings.name != null ? '${route.settings.name}$p' : '??';
+    logd('*** didPush. ${previousRoute?.settings.name ?? '?'}->$name');
   }
 
   @override

@@ -1,7 +1,8 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element
+// ignore_for_file: unused_element, unnecessary_cast
+// ignore_for_file: strict_raw_type, inference_failure_on_untyped_parameter
 
 part of 'person_model.dart';
 
@@ -16,11 +17,6 @@ class PersonModelMapper extends ClassMapperBase<PersonModel> {
     return _instance!;
   }
 
-  static T _guard<T>(T Function(MapperContainer) fn) {
-    ensureInitialized();
-    return fn(MapperContainer.globals);
-  }
-
   @override
   final String id = 'PersonModel';
 
@@ -30,7 +26,7 @@ class PersonModelMapper extends ClassMapperBase<PersonModel> {
   static const Field<PersonModel, int> _f$age = Field('age', _$age, opt: true);
 
   @override
-  final Map<Symbol, Field<PersonModel, dynamic>> fields = const {
+  final MappableFields<PersonModel> fields = const {
     #name: _f$name,
     #age: _f$age,
   };
@@ -43,40 +39,44 @@ class PersonModelMapper extends ClassMapperBase<PersonModel> {
   final Function instantiate = _instantiate;
 
   static PersonModel fromMap(Map<String, dynamic> map) {
-    return _guard((c) => c.fromMap<PersonModel>(map));
+    return ensureInitialized().decodeMap<PersonModel>(map);
   }
 
   static PersonModel fromJson(String json) {
-    return _guard((c) => c.fromJson<PersonModel>(json));
+    return ensureInitialized().decodeJson<PersonModel>(json);
   }
 }
 
 mixin PersonModelMappable {
   String toJson() {
-    return PersonModelMapper._guard((c) => c.toJson(this as PersonModel));
+    return PersonModelMapper.ensureInitialized()
+        .encodeJson<PersonModel>(this as PersonModel);
   }
 
   Map<String, dynamic> toMap() {
-    return PersonModelMapper._guard((c) => c.toMap(this as PersonModel));
+    return PersonModelMapper.ensureInitialized()
+        .encodeMap<PersonModel>(this as PersonModel);
   }
 
   PersonModelCopyWith<PersonModel, PersonModel, PersonModel> get copyWith =>
       _PersonModelCopyWithImpl(this as PersonModel, $identity, $identity);
   @override
   String toString() {
-    return PersonModelMapper._guard((c) => c.asString(this));
+    return PersonModelMapper.ensureInitialized()
+        .stringifyValue(this as PersonModel);
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (runtimeType == other.runtimeType &&
-            PersonModelMapper._guard((c) => c.isEqual(this, other)));
+            PersonModelMapper.ensureInitialized()
+                .isValueEqual(this as PersonModel, other));
   }
 
   @override
   int get hashCode {
-    return PersonModelMapper._guard((c) => c.hash(this));
+    return PersonModelMapper.ensureInitialized().hashValue(this as PersonModel);
   }
 }
 
