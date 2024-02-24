@@ -20,7 +20,7 @@ class LoggerRiverPod extends ProviderObserver {
   }
 
   @override
-  void didDisposeProvider(ProviderBase provider, ProviderContainer containers) {
+  void didDisposeProvider(ProviderBase provider, ProviderContainer container) {
     if (kDebugMode) {
       print('''
 {
